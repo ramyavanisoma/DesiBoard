@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Desi Board</title>
+    
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/homePage.css') }}" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="header-placeholder"></div>
+
+    <main>
+      <section id="about">
+        <div class="about-section">
+          <h3>About Us</h3>
+          <p>
+            Desi Board is a dedicated platform committed to supporting the
+            Indian immigrant community in the United States. Our mission is to
+            provide comprehensive assistance for various needs, including
+            visa-related issues, emergency support, legal guidance, and
+            healthcare navigation. We understand the unique challenges
+            immigrants face and strive to offer reliable and compassionate
+            support to help you through every step of your journey in the US. At
+            Desi Board, we believe in creating a supportive and resourceful
+            environment to ensure your well-being and success.
+          </p>
+          <p>
+            Our team of experts is always ready to assist you with any concerns
+            or questions you might have. Whether you need help with legal
+            matters, health issues, or emergency situations, we are here to
+            provide the necessary guidance and support.
+          </p>
+          <img src="{{ url_for('static', filename='img/index1.jpg') }}" alt="About Us" height="500" , width="500" />
+          <img src="{{ url_for('static', filename='img/index2.jpg') }}" alt="About Us" height="500" , width="500" />
+        </div>
+      </section>
+
+      <!-- section for testimonial -->
+      <section id="testimonials">
+        <div class="testimonials-section">
+          <h3>What Our Users Say</h3>
+          <div class="testimonial">
+            <img src="{{ url_for('static', filename='img/testimonial1.jpg') }}" alt="Priya" />
+            <p>
+              "Desi Board provided me with invaluable support when I faced a
+              visa issue. Their guidance was clear and effective. Highly
+              recommend their services!" - Priya
+            </p>
+          </div>
+          <div class="testimonial">
+            <img src="{{ url_for('static', filename='img/testimonial2.jpg') }}" alt="Amit" />
+            <p>
+              "I reached out to Desi Board during a health emergency, and they
+              were extremely helpful. Their prompt response and expert advice
+              made a huge difference." - Amit
+            </p>
+          </div>
+          <div class="testimonial">
+            <img src="{{ url_for('static', filename='img/testimonial3.jpg') }}" alt="Suresh" />
+            <p>
+              "The legal support from Desi Board was exceptional. They helped me
+              navigate a complex legal situation with ease." - Suresh
+            </p>
+          </div>
+          <div class="testimonial">
+            <img src="{{ url_for('static', filename='img/testimonial4.jpg') }}" alt="Anjali" />
+            <p>
+              "Desi Board's team is amazing! They helped me understand the
+              healthcare system in the US and find the right doctors. Great
+              service!" - Anjali
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="interesting">
+        <div class="interesting-content">
+          <h3>Did You Know?</h3>
+          <p>
+            The Indian community is one of the fastest-growing immigrant groups
+            in the United States, contributing significantly to the country's
+            cultural and economic diversity. At Desi Board, we celebrate this
+            diversity and aim to empower our community with the resources and
+            support they need to thrive.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Contact us at support@gmail.com or call 123-456-7890</p>
+    </footer>
+    <script type="text/javascript" src="https://livejs.com/live.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='header.js') }}"></script>
+  </body>
+</html>

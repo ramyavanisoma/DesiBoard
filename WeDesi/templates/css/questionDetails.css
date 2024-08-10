@@ -1,0 +1,47 @@
+.textbox-wrapper {
+    position: relative;
+}
+.char-count {
+    position: relative;
+    bottom: 26px;
+    right: -2px;
+    background: rgba(255, 255, 255, 0.7);
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-size: 12px;
+}
+.submit-button {
+    position: relative;
+    bottom: 40px;
+    right: 15px;
+    float: right;
+}
+
+.disabled-icon {
+    pointer-events: none;
+    cursor: default; 
+    color: blue; /* Optional: change color to indicate it's disabled */
+}
+
+.active-icon
+{
+    color: grey
+}
+
+
+.textbox-wrapper{
+    width:85%;
+}
+
+#numOfAnswers{
+    margin-left: 7rem;
+}
+
+
+.card-body{
+    background-color: #fffefe;
+}
+
+#upvoteAndAuthorinAnswerCard{
+    margin-bottom: -16px;
+}

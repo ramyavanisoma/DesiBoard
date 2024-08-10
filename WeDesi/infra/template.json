@@ -1,0 +1,390 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "sites_WeDesiPortal_name": {
+            "defaultValue": "WeDesiPortal",
+            "type": "String"
+        },
+        "serverfarms_ASP_TeamBintern_bd99_externalid": {
+            "defaultValue": "/subscriptions/2bd94ec0-b962-4bad-84a8-7900bb20b520/resourceGroups/TeamB_intern/providers/Microsoft.Web/serverfarms/ASP-TeamBintern-bd99",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Web/sites",
+            "apiVersion": "2023-12-01",
+            "name": "[parameters('sites_WeDesiPortal_name')]",
+            "location": "East US",
+            "kind": "app,linux",
+            "properties": {
+                "enabled": true,
+                "hostNameSslStates": [
+                    {
+                        "name": "wedesiportal-d4hrezgefaeqh8d2.eastus-01.azurewebsites.net",
+                        "sslState": "Disabled",
+                        "hostType": "Standard"
+                    },
+                    {
+                        "name": "wedesiportal-d4hrezgefaeqh8d2.scm.eastus-01.azurewebsites.net",
+                        "sslState": "Disabled",
+                        "hostType": "Repository"
+                    }
+                ],
+                "serverFarmId": "[parameters('serverfarms_ASP_TeamBintern_bd99_externalid')]",
+                "reserved": true,
+                "isXenon": false,
+                "hyperV": false,
+                "dnsConfiguration": {},
+                "vnetRouteAllEnabled": false,
+                "vnetImagePullEnabled": false,
+                "vnetContentShareEnabled": false,
+                "siteConfig": {
+                    "numberOfWorkers": 1,
+                    "linuxFxVersion": "PYTHON|3.12",
+                    "acrUseManagedIdentityCreds": false,
+                    "alwaysOn": false,
+                    "http20Enabled": false,
+                    "functionAppScaleLimit": 0,
+                    "minimumElasticInstanceCount": 1
+                },
+                "scmSiteAlsoStopped": false,
+                "clientAffinityEnabled": false,
+                "clientCertEnabled": false,
+                "clientCertMode": "Required",
+                "hostNamesDisabled": false,
+                "vnetBackupRestoreEnabled": false,
+                "customDomainVerificationId": "672333BDA74EC0F83A87E87250FEC40B77DCF2BC97C4B4C99166AB803ADFA7D1",
+                "containerSize": 0,
+                "dailyMemoryTimeQuota": 0,
+                "httpsOnly": true,
+                "redundancyMode": "None",
+                "storageAccountRequired": false,
+                "keyVaultReferenceIdentity": "SystemAssigned"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_WeDesiPortal_name'), '/ftp')]",
+            "location": "East US",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_WeDesiPortal_name'))]"
+            ],
+            "properties": {
+                "allow": true
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_WeDesiPortal_name'), '/scm')]",
+            "location": "East US",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_WeDesiPortal_name'))]"
+            ],
+            "properties": {
+                "allow": true
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/config",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_WeDesiPortal_name'), '/web')]",
+            "location": "East US",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_WeDesiPortal_name'))]"
+            ],
+            "properties": {
+                "numberOfWorkers": 1,
+                "defaultDocuments": [
+                    "Default.htm",
+                    "Default.html",
+                    "Default.asp",
+                    "index.htm",
+                    "index.html",
+                    "iisstart.htm",
+                    "default.aspx",
+                    "index.php",
+                    "hostingstart.html"
+                ],
+                "netFrameworkVersion": "v4.0",
+                "linuxFxVersion": "PYTHON|3.12",
+                "requestTracingEnabled": false,
+                "remoteDebuggingEnabled": false,
+                "remoteDebuggingVersion": "VS2022",
+                "httpLoggingEnabled": false,
+                "acrUseManagedIdentityCreds": false,
+                "logsDirectorySizeLimit": 35,
+                "detailedErrorLoggingEnabled": false,
+                "publishingUsername": "$WeDesiPortal",
+                "scmType": "VSTSRM",
+                "use32BitWorkerProcess": true,
+                "webSocketsEnabled": false,
+                "alwaysOn": false,
+                "managedPipelineMode": "Integrated",
+                "virtualApplications": [
+                    {
+                        "virtualPath": "/",
+                        "physicalPath": "site\\wwwroot",
+                        "preloadEnabled": false
+                    }
+                ],
+                "loadBalancing": "LeastRequests",
+                "experiments": {
+                    "rampUpRules": []
+                },
+                "autoHealEnabled": false,
+                "vnetRouteAllEnabled": false,
+                "vnetPrivatePortsCount": 0,
+                "localMySqlEnabled": false,
+                "ipSecurityRestrictions": [
+                    {
+                        "ipAddress": "Any",
+                        "action": "Allow",
+                        "priority": 2147483647,
+                        "name": "Allow all",
+                        "description": "Allow all access"
+                    }
+                ],
+                "scmIpSecurityRestrictions": [
+                    {
+                        "ipAddress": "Any",
+                        "action": "Allow",
+                        "priority": 2147483647,
+                        "name": "Allow all",
+                        "description": "Allow all access"
+                    }
+                ],
+                "scmIpSecurityRestrictionsUseMain": false,
+                "http20Enabled": false,
+                "minTlsVersion": "1.2",
+                "scmMinTlsVersion": "1.2",
+                "ftpsState": "FtpsOnly",
+                "preWarmedInstanceCount": 0,
+                "elasticWebAppScaleLimit": 0,
+                "functionsRuntimeScaleMonitoringEnabled": false,
+                "minimumElasticInstanceCount": 1,
+                "azureStorageAccounts": {}
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_WeDesiPortal_name'), '/101723004148987')]",
+            "location": "East US",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_WeDesiPortal_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author": "Ashwini Somani",
+                "deployer": "VSTS",
+                "message": "{\"type\":\"Deployment\",\"commitId\":\"5427040ed7440d874b226dac2f3c27a1bc0621d2\",\"buildId\":\"862\",\"releaseId\":\"10\",\"buildNumber\":\"20240807.9\",\"releaseName\":\"Release-6\",\"repoProvider\":\"TfsGit\",\"repoName\":\"Wedesi\",\"collectionUrl\":\"https://dev.azure.com/Intership2024/\",\"teamProject\":\"1b15cb1d-476f-41bc-8f4b-c724de58242f\",\"buildProjectUrl\":\"https://dev.azure.com/Intership2024/1b15cb1d-476f-41bc-8f4b-c724de58242f\",\"repositoryUrl\":\"\",\"branch\":\"main\",\"teamProjectName\":\"Wedesi\",\"slotName\":\"production\"}",
+                "start_time": "2024-08-07T04:15:49.3788468Z",
+                "end_time": "2024-08-07T04:15:49.3788468Z",
+                "active": true
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_WeDesiPortal_name'), '/1887e165-d81a-4196-bc70-297fce2d3cfd')]",
+            "location": "East US",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_WeDesiPortal_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author_email": "N/A",
+                "author": "N/A",
+                "deployer": "VSTS_ZIP_DEPLOY",
+                "message": "N/A",
+                "start_time": "2024-08-02T14:32:50.8516008Z",
+                "end_time": "2024-08-02T14:32:52.445371Z",
+                "active": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_WeDesiPortal_name'), '/1bb6a401-cda8-497c-9dae-63367c24a6af')]",
+            "location": "East US",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_WeDesiPortal_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author_email": "N/A",
+                "author": "N/A",
+                "deployer": "VSTS_ZIP_DEPLOY",
+                "message": "N/A",
+                "start_time": "2024-08-07T03:51:11.9890207Z",
+                "end_time": "2024-08-07T03:51:16.8570305Z",
+                "active": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_WeDesiPortal_name'), '/41722598905692')]",
+            "location": "East US",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_WeDesiPortal_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author": "Ashwini Somani",
+                "deployer": "VSTS",
+                "message": "{\"type\":\"Deployment\",\"commitId\":\"6b0ea02a2e21c81afab40575cf30eabd98f1c764\",\"buildId\":\"480\",\"releaseId\":\"4\",\"buildNumber\":\"20240802.18\",\"releaseName\":\"Release-1\",\"repoProvider\":\"TfsGit\",\"repoName\":\"Wedesi\",\"collectionUrl\":\"https://dev.azure.com/Intership2024/\",\"teamProject\":\"1b15cb1d-476f-41bc-8f4b-c724de58242f\",\"buildProjectUrl\":\"https://dev.azure.com/Intership2024/1b15cb1d-476f-41bc-8f4b-c724de58242f\",\"repositoryUrl\":\"\",\"branch\":\"azure-pipelines-ashwini\",\"teamProjectName\":\"Wedesi\",\"slotName\":\"production\"}",
+                "start_time": "2024-08-02T11:41:45.8105347Z",
+                "end_time": "2024-08-02T11:41:45.8105347Z",
+                "active": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_WeDesiPortal_name'), '/41722609180898')]",
+            "location": "East US",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_WeDesiPortal_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author": "Ashwini Somani",
+                "deployer": "VSTS",
+                "message": "{\"type\":\"Deployment\",\"commitId\":\"6b0ea02a2e21c81afab40575cf30eabd98f1c764\",\"buildId\":\"480\",\"releaseId\":\"4\",\"buildNumber\":\"20240802.18\",\"releaseName\":\"Release-1\",\"repoProvider\":\"TfsGit\",\"repoName\":\"Wedesi\",\"collectionUrl\":\"https://dev.azure.com/Intership2024/\",\"teamProject\":\"1b15cb1d-476f-41bc-8f4b-c724de58242f\",\"buildProjectUrl\":\"https://dev.azure.com/Intership2024/1b15cb1d-476f-41bc-8f4b-c724de58242f\",\"repositoryUrl\":\"\",\"branch\":\"azure-pipelines-ashwini\",\"teamProjectName\":\"Wedesi\",\"slotName\":\"production\"}",
+                "start_time": "2024-08-02T14:33:01.2306304Z",
+                "end_time": "2024-08-02T14:33:01.2306304Z",
+                "active": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_WeDesiPortal_name'), '/5ec723e2-8e09-414b-aae1-4559fb97eada')]",
+            "location": "East US",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_WeDesiPortal_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author_email": "N/A",
+                "author": "N/A",
+                "deployer": "VSTS_ZIP_DEPLOY",
+                "message": "N/A",
+                "start_time": "2024-08-07T00:49:21.2874942Z",
+                "end_time": "2024-08-07T00:49:25.29366Z",
+                "active": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_WeDesiPortal_name'), '/6915c9a7-287d-4947-94eb-0e9eaeca0e9f')]",
+            "location": "East US",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_WeDesiPortal_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author_email": "N/A",
+                "author": "N/A",
+                "deployer": "VSTS_ZIP_DEPLOY",
+                "message": "N/A",
+                "start_time": "2024-08-07T04:07:56.8721154Z",
+                "end_time": "2024-08-07T04:08:01.5851203Z",
+                "active": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_WeDesiPortal_name'), '/71722991818910')]",
+            "location": "East US",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_WeDesiPortal_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author": "Ashwini Somani",
+                "deployer": "VSTS",
+                "message": "{\"type\":\"Deployment\",\"commitId\":\"186b4f6346012130f8e29c5f82c5682ccece0ba0\",\"buildId\":\"841\",\"releaseId\":\"7\",\"buildNumber\":\"20240807.5\",\"releaseName\":\"Release-3\",\"repoProvider\":\"TfsGit\",\"repoName\":\"Wedesi\",\"collectionUrl\":\"https://dev.azure.com/Intership2024/\",\"teamProject\":\"1b15cb1d-476f-41bc-8f4b-c724de58242f\",\"buildProjectUrl\":\"https://dev.azure.com/Intership2024/1b15cb1d-476f-41bc-8f4b-c724de58242f\",\"repositoryUrl\":\"\",\"branch\":\"main\",\"teamProjectName\":\"Wedesi\",\"slotName\":\"production\"}",
+                "start_time": "2024-08-07T00:50:19.3752103Z",
+                "end_time": "2024-08-07T00:50:19.3752103Z",
+                "active": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_WeDesiPortal_name'), '/81723002683786')]",
+            "location": "East US",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_WeDesiPortal_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author": "Ashwini Somani",
+                "deployer": "VSTS",
+                "message": "{\"type\":\"Deployment\",\"commitId\":\"bcf92463e373f4948a6fdd2a7ca24d8b670b232d\",\"buildId\":\"856\",\"releaseId\":\"8\",\"buildNumber\":\"20240807.7\",\"releaseName\":\"Release-4\",\"repoProvider\":\"TfsGit\",\"repoName\":\"Wedesi\",\"collectionUrl\":\"https://dev.azure.com/Intership2024/\",\"teamProject\":\"1b15cb1d-476f-41bc-8f4b-c724de58242f\",\"buildProjectUrl\":\"https://dev.azure.com/Intership2024/1b15cb1d-476f-41bc-8f4b-c724de58242f\",\"repositoryUrl\":\"\",\"branch\":\"main\",\"teamProjectName\":\"Wedesi\",\"slotName\":\"production\"}",
+                "start_time": "2024-08-07T03:51:24.2020322Z",
+                "end_time": "2024-08-07T03:51:24.2020322Z",
+                "active": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_WeDesiPortal_name'), '/91723003687203')]",
+            "location": "East US",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_WeDesiPortal_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author": "Ashwini Somani",
+                "deployer": "VSTS",
+                "message": "{\"type\":\"Deployment\",\"commitId\":\"bcf92463e373f4948a6fdd2a7ca24d8b670b232d\",\"buildId\":\"860\",\"releaseId\":\"9\",\"buildNumber\":\"20240807.8\",\"releaseName\":\"Release-5\",\"repoProvider\":\"TfsGit\",\"repoName\":\"Wedesi\",\"collectionUrl\":\"https://dev.azure.com/Intership2024/\",\"teamProject\":\"1b15cb1d-476f-41bc-8f4b-c724de58242f\",\"buildProjectUrl\":\"https://dev.azure.com/Intership2024/1b15cb1d-476f-41bc-8f4b-c724de58242f\",\"repositoryUrl\":\"\",\"branch\":\"main\",\"teamProjectName\":\"Wedesi\",\"slotName\":\"production\"}",
+                "start_time": "2024-08-07T04:08:07.5491606Z",
+                "end_time": "2024-08-07T04:08:07.5491606Z",
+                "active": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_WeDesiPortal_name'), '/a748032f-43a0-42dc-a16e-c9ba61561f18')]",
+            "location": "East US",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_WeDesiPortal_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author_email": "N/A",
+                "author": "N/A",
+                "deployer": "VSTS_ZIP_DEPLOY",
+                "message": "N/A",
+                "start_time": "2024-08-07T04:15:28.4804225Z",
+                "end_time": "2024-08-07T04:15:44.0021439Z",
+                "active": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/hostNameBindings",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_WeDesiPortal_name'), '/', parameters('sites_WeDesiPortal_name'), '-d4hrezgefaeqh8d2.eastus-01.azurewebsites.net')]",
+            "location": "East US",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_WeDesiPortal_name'))]"
+            ],
+            "properties": {
+                "siteName": "WeDesiPortal",
+                "hostNameType": "Verified"
+            }
+        }
+    ]
+}

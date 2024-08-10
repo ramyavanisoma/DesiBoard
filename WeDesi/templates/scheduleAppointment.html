@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Desi Board</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/homePage.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/scheduleAppointment.css') }}"/>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    
+  </head>
+  <body>
+    <div id="header-placeholder"></div>
+
+    <main>
+
+        <div class="appointment-form">
+            <h2>Schedule an Appointment</h2>
+            <form id="appointmentForm">
+                <div class="mb-3">
+                    <label for="title">Title:</label>
+                    <input type="text" class="form-control" id="title" name="title" required>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description:</label>
+                    <textarea class="form-control" id="description" rows="4" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="category" class="form-label">Category:</label>
+                    <select class="form-select" id="category" required>
+                        <option value="" disabled selected>Select a category</option>
+                        <option value="Emergency">Emergency</option>
+                        <option value="Health">Health</option>
+                        <option value="Legal">Legal</option>
+                        <option value="Visa">Visa</option>
+                        <option value="CreditCard">Credit Card</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+
+                <div id="AppointmentResponseMessage"></div>
+            </form>
+            <div id="confirmation">
+            </div>
+        </div>
+
+            <h1 id="weDesiScheduling">WeDesi Services:</h1>
+
+        <!-- Table for categories, description and support we provide -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Support Details</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td><strong>Emergency</strong></td>
+                    <td>We recognize the stress and complexity of emergencies, particularly when away from home. Our emergency support services are designed to offer immediate assistance and guidance. Be it a medical situation, legal issue, or other urgent concerns, our dedicated team is prepared to help you navigate through these challenges efficiently.</td>
+                    <td>
+                        <ul>
+                            <li>24/7 helplines for immediate support.</li>
+                            <li>Quick response coordination with local services.</li>
+                            <li>Personalized support tailored to your specific emergency needs.</li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td><strong>Credit Card</strong></td>
+                    <td>At Desi Board, we emphasize the significance of maintaining a strong credit score and its impact on your financial health. Our credit card support services are tailored to assist you with credit score-related issues and provide expert guidance on managing and improving it.</td>
+                    <td>
+                        <ul>
+                            <li>Personalized advice on enhancing your credit score, including debt management and optimizing credit utilization.</li>
+                            <li>Resources and tips for ongoing credit score monitoring and effective management.</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Visa</strong></td>
+                    <td>Indian immigrants face several challenges with U.S. visa processes, including high demand for H-1B visas, lengthy green card backlogs, and complexities in visa extensions, transfers, and compliance with immigration laws. Family visa applications and student visa transitions (e.g., F-1 to H-1B) also present difficulties.
+                         Travel restrictions and visa stamping abroad add further complications.</td>
+                    <td>Immigration experts provide crucial support by offering legal consultations assisting with the following:
+                        <ul>
+                            <li> Personalized legal consultations for visa (H-1B,B-1/B-2,L-1,F-1,STEM OPT) concerns.</li>                                
+                            <li>Developing long-term immigration strategies.</li>
+                            <li>Regular compliance monitoring with immigration laws.</li>
+                            <li>Expert legal representation for visa issues.</li>
+                            <li>Developing long-term immigration strategies.</li>
+                            <li>Assistance with preparing and reviewing documentation.</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Health</strong></td>
+                    <td>Desi Board is dedicated to aiding you with health-related challenges encountered while residing in the US. Our health support services facilitate your navigation of the healthcare system, finding medical professionals, comprehending insurance and co-payments, and ensuring you receive necessary care.</td>
+                    <td>
+                        <ul>
+                            <li>Assistance in locating doctors and understanding medical benefits.</li>
+                            <li>Guidance on managing healthcare costs.</li>
+                            <li>Tailored resources to meet your specific health needs.</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Legal</strong></td>
+                    <td>Understanding and navigating the legal system in a foreign country can be intricate. Our legal support services at Desi Board offer expert guidance and assistance for a variety of legal concerns, including immigration issues and legal disputes.</td>
+                    <td>
+                        <ul>
+                            <li>Expert advice on understanding your rights and exploring immigration options.</li>
+                            <li>Support in identifying the best course of action.</li>
+                            <li>Resources, referrals, and comprehensive support to address your legal needs.</li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+
+    </main>
+    <footer>
+        <p>Contact us at support@gmail.com or call 123-456-7890</p>
+      </footer>
+      <script type="text/javascript" src="https://livejs.com/live.js"></script>
+          
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+      <script  src="{{ url_for('static', filename='scheduleAppointment.js') }}"></script>
+      <script src="{{ url_for('static', filename='header.js') }}"></script>
+    </body>
+  </html>
+
+
+
+
+  
+    
+
+    
